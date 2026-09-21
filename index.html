@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NARDA</title>
+<style>
+body{margin:0;background:#17100b;color:white;font-family:Arial;text-align:center}
+h1{margin:15px}
+#turn{font-size:18px;margin:10px}
+.board{width:92%;max-width:650px;margin:auto;padding:10px;background:#8b542d;border:5px solid #d59b55;border-radius:12px}
+.row{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.point{height:180px;background:#d9a35c;position:relative}
+.point:nth-child(even){background:#9d5e35}
+.triangle{width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-top:130px solid #633617;margin:auto}
+.dice{font-size:45px;margin:15px}
+button{padding:14px 25px;border:0;border-radius:10px;font-size:18px;font-weight:bold}
+#msg{margin:15px}
+</style>
+</head>
+<body>
+
+<h1>🎲 NARDA</h1>
+<div id="turn">Navbat: Oq</div>
+
+<div class="board">
+<div class="row">
+<div class="point"><div class="triangle"></div></div>
+<div class="point"><div class="triangle"></div></div>
+<div class="point"><div class="triangle"></div></div>
+<div class="point"><div class="triangle"></div></div>
+<div class="point"><div class="triangle"></div></div>
+<div class="point"><div class="triangle"></div></div>
+</div>
+
+<div class="row">
+<div class="point"><div class="triangle"></div></div>
+<div class="point"><div class="triangle"></div></div>
+<div class="point"><div class="triangle"></div></div>
+<div class="point"><div class="triangle"></div></div>
+<div class="point"><div class="triangle"></div></div>
+<div class="point"><div class="triangle"></div></div>
+</div>
+</div>
+
+<div class="dice" id="dice">🎲 🎲</div>
+
+<button onclick="roll()">ZAR TASHLASH</button>
+
+<div id="msg">O‘yinni boshlang!</div>
+
+<script>
+let player="Oq";
+
+function roll(){
+let a=Math.floor(Math.random()*6)+1;
+let b=Math.floor(Math.random()*6)+1;
+
+document.getElementById("dice").innerText="🎲 "+a+"   🎲 "+b;
+document.getElementById("msg").innerText=player+"ga "+a+" va "+b+" tushdi!";
+
+player=player==="Oq"?"Qora":"Oq";
+document.getElementById("turn").innerText="Navbat: "+player;
+}
+</script>
+
+</body>
+</html>
