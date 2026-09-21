@@ -2,192 +2,114 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NARDA</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NARDA 3D</title>
 
 <style>
-body{
+*{
+  box-sizing:border-box;
   margin:0;
-  background:#17100b;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% 20%,#303030,#101010 65%);
   color:white;
-  font-family:Arial;
-  text-align:center;
+  font-family:Arial,sans-serif;
+  overflow:hidden;
 }
 
-h1{margin:15px}
-
-#turn{
-  font-size:18px;
-  margin:10px;
-}
-
-.board{
-  width:92%;
-  max-width:650px;
-  margin:auto;
-  padding:10px;
-  background:#8b542d;
-  border:5px solid #d59b55;
-  border-radius:12px;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:4px;
-}
-
-.point{
-  height:150px;
-  background:#d9a35c;
-  position:relative;
-}
-
-.point:nth-child(even){
-  background:#9d5e35;
-}
-
-.triangle{
-  width:0;
-  height:0;
-  border-left:22px solid transparent;
-  border-right:22px solid transparent;
-  border-top:120px solid #633617;
-  margin:auto;
-}
-
-/* ZARLAR DOSKA ICHIDA */
-.dice-area{
-  height:110px;
+/* HEADER */
+.top{
+  height:60px;
   display:flex;
-  justify-content:center;
   align-items:center;
-  gap:25px;
-  background:#70401f;
-  border-radius:10px;
-  margin:8px 0;
+  justify-content:space-between;
+  padding:8px 14px;
+  background:rgba(0,0,0,.45);
 }
 
-.dice{
-  font-size:55px;
-  display:inline-block;
-}
-
-.rolling{
-  animation:rollDice .35s linear infinite;
-}
-
-@keyframes rollDice{
-  0%{transform:rotate(0deg) scale(1)}
-  25%{transform:rotate(90deg) scale(1.15)}
-  50%{transform:rotate(180deg) scale(1)}
-  75%{transform:rotate(270deg) scale(1.15)}
-  100%{transform:rotate(360deg) scale(1)}
+.logo{
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:2px;
 }
 
 button{
-  padding:14px 25px;
   border:0;
-  border-radius:10px;
-  font-size:18px;
+  border-radius:12px;
+  padding:10px 15px;
   font-weight:bold;
-  margin-top:15px;
+  color:white;
+  background:linear-gradient(145deg,#444,#181818);
+  box-shadow:
+    0 4px 0 #050505,
+    0 7px 15px #0008;
 }
 
-#msg{
-  margin:15px;
-}
-</style>
-</head>
-
-<body>
-
-<h1>🎲 NARDA</h1>
-
-<div id="turn">Navbat: Oq</div>
-
-<div class="board">
-
-  <div class="row">
-    <div class="point"><div class="triangle"></div></div>
-    <div class="point"><div class="triangle"></div></div>
-    <div class="point"><div class="triangle"></div></div>
-    <div class="point"><div class="triangle"></div></div>
-    <div class="point"><div class="triangle"></div></div>
-    <div class="point"><div class="triangle"></div></div>
-  </div>
-
-  <!-- ZARLAR -->
-  <div class="dice-area">
-    <div class="dice" id="dice1">⚀</div>
-    <div class="dice" id="dice2">⚀</div>
-  </div>
-
-  <div class="row">
-    <div class="point"><div class="triangle"></div></div>
-    <div class="point"><div class="triangle"></div></div>
-    <div class="point"><div class="triangle"></div></div>
-    <div class="point"><div class="triangle"></div></div>
-    <div class="point"><div class="triangle"></div></div>
-    <div class="point"><div class="triangle"></div></div>
-  </div>
-
-</div>
-
-<button onclick="roll()">🎲 ZAR TASHLASH</button>
-
-<div id="msg">O‘yinni boshlang!</div>
-
-<script>
-
-let player="Oq";
-
-const faces=["⚀","⚁","⚂","⚃","⚄","⚅"];
-
-function roll(){
-
-  const d1=document.getElementById("dice1");
-  const d2=document.getElementById("dice2");
-
-  d1.classList.add("rolling");
-  d2.classList.add("rolling");
-
-  let count=0;
-
-  let animation=setInterval(function(){
-
-    d1.innerText=faces[Math.floor(Math.random()*6)];
-    d2.innerText=faces[Math.floor(Math.random()*6)];
-
-    count++;
-
-    if(count>=10){
-
-      clearInterval(animation);
-
-      let a=Math.floor(Math.random()*6)+1;
-      let b=Math.floor(Math.random()*6)+1;
-
-      d1.innerText=faces[a-1];
-      d2.innerText=faces[b-1];
-
-      d1.classList.remove("rolling");
-      d2.classList.remove("rolling");
-
-      document.getElementById("msg").innerText=
-        player+"ga "+a+" va "+b+" tushdi!";
-
-      player=player==="Oq"?"Qora":"Oq";
-
-      document.getElementById("turn").innerText=
-        "Navbat: "+player;
-    }
-
-  },120);
+button:active{
+  transform:translateY(3px);
+  box-shadow:0 2px 0 #050505;
 }
 
-</script>
+/* MAIN */
+.game{
+  height:calc(100vh - 60px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  padding:10px;
+}
 
-</body>
-  <div style="display:none">NARDA</div>
-</html>
+/* PLAYER */
+.player{
+  width:145px;
+  min-width:145px;
+  text-align:center;
+  padding:12px 7px;
+  border-radius:18px;
+  background:rgba(20,20,20,.7);
+  border:1px solid #ffffff18;
+}
+
+.avatar{
+  width:60px;
+  height:60px;
+  margin:auto;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  background:linear-gradient(145deg,#555,#111);
+  border:3px solid #d8a62a;
+  box-shadow:0 5px 18px #000;
+}
+
+.name{
+  margin-top:7px;
+  font-weight:bold;
+}
+
+.username{
+  font-size:12px;
+  color:#aaa;
+}
+
+/* BOARD AREA */
+.board-wrap{
+  perspective:1300px;
+}
+
+.board{
+  position:relative;
+  width:min(72vw,900px);
+  height:min(72vh,600px);
+  min-width:600px;
+  min-height:390px;
+
+  transform:rotate
